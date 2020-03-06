@@ -6,7 +6,6 @@ import redis.clients.jedis.Pipeline;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class JedisPipelineDemo {
 
@@ -21,16 +20,19 @@ public class JedisPipelineDemo {
         Pipeline p = jedis.pipelined();
         for (int i = 0; i < 10000; i++)
             p.ping();
+        p.sync(); // 获取所有的响应
     }
 
     void serialTask() {
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        withoutPipeline(); // 310 ms
-        System.out.println("withoutPipeline time: " + stopwatch.stop().elapsed(TimeUnit.MILLISECONDS) + " ms");
+        printTime(() -> withoutPipeline(), "withoutPipeline"); // 346.4 ms
+        printTime(() -> withPipeline(), "withPipeline");       // 18.34 ms
+    }
 
-        stopwatch.reset().start();
-        withPipeline(); // 16 ms
-        System.out.println("withPipeline time: " + stopwatch.stop().elapsed(TimeUnit.MILLISECONDS) + " ms");
+    // 虽然传入的是Runnable对象，直接调用run方法并没有创建线程，而是使用当前线程同步执行方法。
+    void printTime(Runnable task, String taskName) {
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        task.run();
+        System.out.println(taskName + " took: " + stopwatch.stop());
     }
 
     void concurrentTask() {
