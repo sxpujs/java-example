@@ -1,6 +1,6 @@
 package com.demo.leecode.dp;
 
-public class S53MaximumSubarray {
+public class S053MaximumSubarray {
 
     public int maxSubArray(int[] nums) {
         int maxSum = nums[0];
@@ -16,6 +16,6 @@ public class S53MaximumSubarray {
 
     public static void main(String[] args) {
         int[] nums = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        System.out.println(new S53MaximumSubarray().maxSubArray(nums));
+        System.out.println(new S053MaximumSubarray().maxSubArray(nums));
     }
 }
