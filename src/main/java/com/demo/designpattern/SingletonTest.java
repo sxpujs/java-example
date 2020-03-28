@@ -21,12 +21,12 @@ public class SingletonTest {
     }
 
     public static void runTask(Callable<Integer> callableTask) {
-        int cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService threadPool = Executors.newFixedThreadPool(cores);
         List<Callable<Integer>> callableTasks = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {
             callableTasks.add(callableTask);
         }
+        int cores = Runtime.getRuntime().availableProcessors();
+        ExecutorService threadPool = Executors.newFixedThreadPool(cores);
         Map<Integer, Integer> frequency = new HashMap<>();
         try {
             List<Future<Integer>> futures = threadPool.invokeAll(callableTasks);
