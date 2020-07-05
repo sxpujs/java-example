@@ -42,8 +42,11 @@ public class RateLimiterDemo {
         pool.shutdown();
     }
 
-    public static void main(String[] args) {
-        //submitTasks1();
+    public static void main(String[] args) throws InterruptedException {
+        log.info("begin submitTasks1");
+        submitTasks1();
+        Thread.sleep(2000);
+        log.info("begin submitTasks2");
         submitTasks2();
     }
 }
