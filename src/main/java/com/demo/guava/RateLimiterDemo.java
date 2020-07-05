@@ -43,10 +43,9 @@ public class RateLimiterDemo {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        log.info("begin submitTasks1");
-        submitTasks1();
-        Thread.sleep(2000);
-        log.info("begin submitTasks2");
+        //submitTasks1();
         submitTasks2();
+        //submitTasks3();
+        //submitTasks4();
     }
 }
