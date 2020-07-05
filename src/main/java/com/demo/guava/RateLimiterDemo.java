@@ -42,6 +42,24 @@ public class RateLimiterDemo {
         pool.shutdown();
     }
 
+    static void submitTasks3() {
+        RateLimiter r = RateLimiter.create(5);
+        log.info("start");
+        for (;;) {
+            log.info("get 1 tokens: " + r.acquire() + "s");
+        }
+    }
+
+    static void submitTasks4() {
+        RateLimiter r = RateLimiter.create(5);
+        log.info("start");
+        for (;;) {
+            if (r.tryAcquire()) {
+                log.info("run");
+            }
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException {
         //submitTasks1();
         submitTasks2();
