@@ -64,7 +64,7 @@ public class RocksDBColumnFamilySample {
               "value2".getBytes());
           wb.put(columnFamilyHandles.get(1), "key3".getBytes(),
               "value3".getBytes());
-          wb.remove(columnFamilyHandles.get(0), "key".getBytes());
+          wb.delete(columnFamilyHandles.get(0), "key".getBytes());
           db.write(new WriteOptions(), wb);
         }
 

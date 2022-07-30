@@ -206,7 +206,7 @@ public class RocksDBSample {
         len = db.get(readOptions, testKey, enoughArray);
         assert (len == testValue.length);
 
-        db.remove(testKey);
+        db.delete(testKey);
         len = db.get(testKey, enoughArray);
         assert (len == RocksDB.NOT_FOUND);
 
@@ -287,15 +287,15 @@ public class RocksDBSample {
           }
         }
 
-        Map<byte[], byte[]> values = db.multiGet(keys);
+        List<byte[]> values = db.multiGetAsList(keys);
         assert (values.size() == keys.size());
-        for (final byte[] value1 : values.values()) {
+        for (final byte[] value1 : values) {
           assert (value1 != null);
         }
 
-        values = db.multiGet(new ReadOptions(), keys);
+        values = db.multiGetAsList(new ReadOptions(), keys);
         assert (values.size() == keys.size());
-        for (final byte[] value1 : values.values()) {
+        for (final byte[] value1 : values) {
           assert (value1 != null);
         }
       } catch (final RocksDBException e) {
