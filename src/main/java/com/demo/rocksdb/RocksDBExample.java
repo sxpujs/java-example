@@ -45,7 +45,7 @@ public class RocksDBExample {
 
                 // 删除一个key
                 rocksDB.delete(key);
-                System.out.println("after remove key:" + new String(key));
+                System.out.println("after delete key:" + new String(key));
 
                 iter = rocksDB.newIterator();
                 for (iter.seekToFirst(); iter.isValid(); iter.next()) {
